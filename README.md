@@ -40,5 +40,30 @@ Searched json using /json and found json-pretty using n and shift + n
 
 ![image](https://user-images.githubusercontent.com/97579029/206563860-3102d534-f159-4cd0-8758-6c078ba69b2e.png)
 
+## Part 4
+
+    #!/bin/bash
+
+    echo "Regular users on the system are:" > /etc/motd
+    awk -F: '{if ($3 >= 1000 && $3 <= 5000) print $1 " " $3 " " $7}' /etc/passwd >> /etc/motd
+
+    echo -e "\nUsers currently logged in are:" >> /etc/motd
+    who | awk '{print $1}' >> /etc/motd
+    
+## Part 5
+
+![image](https://user-images.githubusercontent.com/97579029/206570293-e4fee3ea-fac8-4044-b364-1d3d2d8f2b32.png)
+
+I put the service file in ```/etc/systemd/system/```
+
+    [Unit]
+    Description=Prints users on the system and the currently logged in users
+
+    [Service]
+    Type=oneshot
+    ExecStart=/bin/bash /home/vagrant/users
+
+    [Install]
+    WantedBy=multi-user.target
 
 
