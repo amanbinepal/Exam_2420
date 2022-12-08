@@ -65,5 +65,24 @@ I put the service file in ```/etc/systemd/system/```
 
     [Install]
     WantedBy=multi-user.target
+    
+## Part 6
+
+![image](https://user-images.githubusercontent.com/97579029/206572506-10080131-e480-4eda-a3b2-fce65e995c1b.png)
+
+    [Unit]
+    Description=Timer that runs service when system is started. It runs 1 minute after booting and again everyday while unit is active
+
+    [Timer]
+    Unit=users.service
+    OnBootSec=1min
+    OnUnitActiveSec=24h
+    Persistent=true
+
+    [Install]
+    WantedBy=timers.target
+
+
+
 
 
